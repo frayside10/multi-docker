@@ -1,0 +1,35 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefintiions": [
+    {
+      "name": "client",
+      "image": "frayside10/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server", 
+      "image": "frayside10/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "frayside10/multi-worker",
+      "hostname": "worker", 
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "frayside10/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        { 
+          "hostPort": 80, 
+          "containerPort":90
+        }
+       ],
+      "links": ["client", "server"]
+    }
+  ]
+}
